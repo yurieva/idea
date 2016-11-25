@@ -1,7 +1,8 @@
-package com.example.idea1;
+package com.examples.idea1;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.regex.*;
 
 public class idea1 {
     public static Boolean isCharInMass(char[] initMass, char symbol) {
@@ -95,13 +96,11 @@ public class idea1 {
         }
         return wordsLength;
     }
-/*
-    public static boolean isNumericWord(String word) { //???
-        if (word.matches("[0-9]")) {
-            System.out.println("numeric");
-            return true;
-        }
-        return false;
+
+     public static boolean isNumericWord(String word) {
+        Pattern regexp = Pattern.compile("[0-9]+");
+        Matcher m = regexp.matcher(word);
+        return m.matches();
     }
 
     public static void findFirstOrSecondNumeric(String[] word) { //???
@@ -114,18 +113,18 @@ public class idea1 {
             }
         }
         if (test.size()>0)
-        System.out.println("Слово состоит только из цифр: " + test.get(0));
-        else System.out.println("Второе слово состоит только из цифр: " + test.get(1));
+        System.out.println("Второе слово состоит только из цифр: " + test.get(1));
+        else System.out.println("Слово состоит только из цифр: " + test.get(0));
     }
-    */
-
 
     public static void main(String[] args) {
         String[] words = getInputWords(); //вводим слова и сплитим в массив
+
         //- Ввести n слов с консоли. Найти слово, в котором число различных символов минимально. Если таких слов несколько, найти первое из них.
         int[] globalMassWithDifSymbols = getMassWithDifValues(words); // считаем число различных символов в каждом слове
         int minIndex = getIndexWithMinValue(globalMassWithDifSymbols); //находим индекс слова с минимальным количеством различных символов
         System.out.println("Минимальное число различных символов в слове: "+words[minIndex]);
+
         //- Ввести n слов с консоли. Найти слово, состоящее только из различных символов. Если таких слов несколько, найти первое из них.
         int[] globalWordsLength = getWordsLength(words);
         for (int i=0; i<words.length; i++)
@@ -137,9 +136,6 @@ public class idea1 {
         }
 
         //- Ввести n слов с консоли. Найти слово, состоящее только из цифр. Если таких слов больше одного, найти второе из них.
-        //findFirstOrSecondNumeric(words);
-
+        findFirstOrSecondNumeric(words);
     }
-
-
 }
